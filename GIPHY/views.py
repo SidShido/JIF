@@ -12,12 +12,13 @@ def listing(request):
     message=url_list
     return HttpResponse(message)
 
-def search(request):
-
+def search(request, tag):
+    print ("tag = ",tag)
     # create an instance of the API class
     api_instance = giphy_client.DefaultApi()
     api_key = '41tWThuAiSlXr4T2bajIh77n8JlG4kSX' # str | Giphy API Key.
-    q = 'hi' # str | Search query term or prhase.
+    q = str(tag) # str | Search query term or prhase.
+    print("q = ",q)
     limit = 50 # int | The maximum number of records to return. (optional) (default to 25)
     offset = 0 # int | An optional results offset. Defaults to 0. (optional) (default to 0)
     rating = 'g' # str | Filters results by specified rating. (optional)
@@ -32,10 +33,11 @@ def search(request):
     except ApiException as e:
         print("Exception when calling DefaultApi->gifs_search_get: %s\n" % e)
 
-    result = [0 for _ in range(limit+1)]
-    url_list = [0 for _ in range(limit+1)]
+    result = [0 for _ in range(1000)]
+    url_list = [0 for _ in range(1000)]
     
     for i in range(limit):
+        print("i = ",i)
         result[i] = api_response.data[i].to_dict() 
         url_list[i] = result[i]['images']['downsized']['url']
         print(url_list[i],"\n")
