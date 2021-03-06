@@ -17,7 +17,7 @@ def search(request):
     # create an instance of the API class
     api_instance = giphy_client.DefaultApi()
     api_key = '41tWThuAiSlXr4T2bajIh77n8JlG4kSX' # str | Giphy API Key.
-    q = 'easy' # str | Search query term or prhase.
+    q = 'hi' # str | Search query term or prhase.
     limit = 50 # int | The maximum number of records to return. (optional) (default to 25)
     offset = 0 # int | An optional results offset. Defaults to 0. (optional) (default to 0)
     rating = 'g' # str | Filters results by specified rating. (optional)
@@ -41,7 +41,7 @@ def search(request):
         print(url_list[i],"\n")
 
     
-    
+    url_list =["<li><img src={}></li>".format(url_list[i]) for i in range(len(url_list))] 
     #url_list ="""<img src={}>""".format(url)
 
     return HttpResponse(url_list)
