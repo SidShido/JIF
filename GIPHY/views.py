@@ -1,13 +1,17 @@
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.shortcuts import render
+from django.template import loader
 from .models import GIFS_urls
 import giphy_client
 
 def index(request):
-    return HttpResponse("Hello, world. Welcome on JIF Web App")
+    message = "Hello, world. Welcome on JIF Web App"
+    template = loader.get_template('GIPHY/index.html')
+    return HttpResponse(template.render(request=request))
 
 def listing(request):
-    # On recup l'url du gif depuis le dico qui est dans model, oon les mets dans une liste en y ajoutant les balises img html
+    # On recup l'url du gif de puis le dico qui est dans model, oon les mets dans une liste en y ajoutant les balises img html
     url_list =["<li><img src={}></li>".format(gifs['url']) for gifs in GIFS_urls] 
     message=url_list
     return HttpResponse(message)
@@ -40,7 +44,7 @@ def search(request, tag):
         print("i = ",i)
         result[i] = api_response.data[i].to_dict() 
         url_list[i] = result[i]['images']['downsized']['url']
-        print(url_list[i],"\n")
+        print(url_list[i],"\n") 
 
     
     url_list =["<li><img src={}></li>".format(url_list[i]) for i in range(len(url_list))] 

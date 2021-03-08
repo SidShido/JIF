@@ -18,7 +18,7 @@ from django.urls import include, path
 from GIPHY import views
 
 urlpatterns = [
-    path( r'^&', views.index),
+    path( '', views.index),
     path('GIPHY/', include('GIPHY.urls')),
     path('admin/', admin.site.urls),
 ]
