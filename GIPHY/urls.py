@@ -6,5 +6,6 @@ from . import views
 urlpatterns = [
     url( r'^listing', views.listing),
     #url( r'^search', views.search),
-    url( r'^(?P<tag>[\w]+)/$', views.search),
+    #url( r'^(?P<tag>[\w]+)/$', views.search),
+    url(r'^search/$', views.search, name='search'),
 ]
